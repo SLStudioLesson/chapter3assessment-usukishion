@@ -217,6 +217,9 @@ public class RecipeUI {
     // 新しいレシピを追加するメソッド
     private void addNewRecipe() {
         Scanner scanner = new Scanner(System.in);
+        /*
+         * Scanner オブジェクトを作成してユーザーの入力を受け取る準備。
+         */
         System.out.println("\nAdding a new recipe.");
         System.out.print("Enter recipe name: ");
         String recipeName = scanner.nextLine();
@@ -231,18 +234,34 @@ public class RecipeUI {
             }
             ingredients.add(new Ingredient(ingredientName.trim()));
         }
+        /*
+         * 材料を保存するための空の List<Ingredient> を作成。
+         * 材料名を入力させ、「done」と入力するまで入力を続ける。
+         * 各材料名は Ingredient クラスのオブジェクトとして作成され、リスト ingredients に追加。
+         */
 
         if (ingredients.isEmpty()) {
             System.out.println("No ingredients were added. Recipe not added.");
-            return; // 空の場合はレシピを追加せず戻る
+            return;
         }
+        /*
+         * 入力された材料が空でないかを確認。
+         * 空の場合は、レシピを追加せず、メソッドを終了。
+         */
 
         Recipe recipe = new Recipe(recipeName, new ArrayList<>(ingredients));
+        /*
+         * 入力したレシピ名と材料リストを使って、新しい Recipe オブジェクトを作成。
+         */
         try {
             dataHandler.writeData(recipe);
             System.out.println("Recipe added successfully.\n");
         } catch (IOException e) {
             System.out.println("Failed to add new recipe: " + e.getMessage());
         }
+        /*
+         * 作成した Recipe オブジェクトを dataHandler を通じてデータファイルに書き込む。
+         * 成功すれば、メッセージを表示し、例外が発生すればエラーメッセージを表示。
+         */
     }
 }

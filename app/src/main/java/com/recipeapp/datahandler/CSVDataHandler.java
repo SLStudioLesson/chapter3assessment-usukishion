@@ -94,10 +94,20 @@ public class CSVDataHandler implements DataHandler {
             writer.println();
         }
     }
+    /*
+     * このメソッドは、Recipe オブジェクトをファイル（指定された filePath）に書き込む処理を行う。
+     * FileWriter(filePath, true) は、指定したファイルに「追記モード」で書き込む。
+     * すでにファイルにデータがある場合でも、上書きせずに新しい内容を追加。
+     * PrintWriter を使用して、レシピ名とその材料をカンマ区切りでファイルに書き込む。
+     */
     @Override
 public ArrayList<Recipe> searchData(String keyword) throws IOException {
     
     return new ArrayList<>();
+    /*
+     * 指定されたキーワード (keyword) を使ってレシピを検索するために定義。
+     * 空の ArrayList<Recipe> を返している。
+     */
 }
 }
 
