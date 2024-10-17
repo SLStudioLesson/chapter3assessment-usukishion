@@ -85,16 +85,22 @@ public class CSVDataHandler implements DataHandler {
     // 指定されたRecipeオブジェクトを追加する
     @Override
     public void writeData(Recipe recipe) throws IOException {
-        try(PrintWriter writer = new PrintWriter(new FileWriter("recipes.csv", true))) {
+        try(PrintWriter writer = new PrintWriter(new FileWriter(filePath, true))) {
             // レシピ名と材料をカンマ区切りで書き込む
             writer.print(recipe.getName());
-            for (String ingredient : recipe.getIngredients()) {
-                writer.print("," + ingredient);
+            for (Ingredient ingredient : recipe.getIngredients()) {
+                writer.print("," + ingredient.getName());
             }
             writer.println();
         }
     }
+    @Override
+public ArrayList<Recipe> searchData(String keyword) throws IOException {
+    
+    return new ArrayList<>();
 }
+}
+
 
     // // 指定されたキーワードでレシピを検索し、一致するRecipeオブジェクトのリストを返す（実装未）
     // @Override

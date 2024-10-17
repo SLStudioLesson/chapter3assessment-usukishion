@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class Recipe {
         private String name;
-        private ArrayList<String> ingredients;
+        private ArrayList<Ingredient> ingredients;
     
         // コンストラクタ
-        public Recipe(String name, ArrayList<String> ingredients) {
+        public Recipe(String name, ArrayList<Ingredient> ingredients) {
             this.name = name;
-            this.ingredients = ingredients;
+            this.ingredients = ingredients;;
         }
     
         // nameフィールドを返す
@@ -18,7 +18,7 @@ public class Recipe {
         }
     
         // ingredientsフィールドを返す
-        public ArrayList<String> getIngredients() {
+        public ArrayList<Ingredient> getIngredients() {
             return ingredients;
         }
 }

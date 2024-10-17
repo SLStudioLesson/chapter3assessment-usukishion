@@ -125,6 +125,7 @@ public class RecipeUI {
     public RecipeUI(DataHandler dataHandler) {
         reader = new BufferedReader(new InputStreamReader(System.in));
         this.dataHandler = dataHandler;
+        this.reader = new BufferedReader(new InputStreamReader(System.in));
     }
     //RecipeUI クラスのインスタンスを生成するためのメソッド。public 修飾子が付いているため、
     //他のクラスからこのクラスのインスタンスを作成することができる。
@@ -211,36 +212,37 @@ public class RecipeUI {
             System.err.println("Error reading file: " + e.getMessage());
         }
     }
-}
+
 
     // 新しいレシピを追加するメソッド
     private void addNewRecipe() {
         Scanner scanner = new Scanner(System.in);
-    System.out.println("\nAdding a new recipe.");
-    System.out.print("Enter recipe name: ");
-    String recipeName = scanner.nextLine();
+        System.out.println("\nAdding a new recipe.");
+        System.out.print("Enter recipe name: ");
+        String recipeName = scanner.nextLine();
 
-    List<String> ingredients = new ArrayList<>(); 
-    System.out.println("Enter ingredients (type 'done' when finished):");
-    while (true) {
-        System.out.print("Ingredient: ");
-        String ingredientName = scanner.nextLine();
-        if (ingredientName.equalsIgnoreCase("done")) {
-            break;
+        List<Ingredient> ingredients = new ArrayList<>();
+        System.out.println("Enter ingredients (type 'done' when finished):");
+        while (true) {
+            System.out.print("Ingredient: ");
+            String ingredientName = scanner.nextLine();
+            if (ingredientName.equalsIgnoreCase("done")) {
+                break;
+            }
+            ingredients.add(new Ingredient(ingredientName.trim()));
         }
-        ingredients.add(ingredientName); 
-    }
 
-    if (ingredients.isEmpty()) {
-        System.out.println("No ingredients were added. Recipe not added.");
-        return; // 空の場合はレシピを追加せず戻る
-    }
+        if (ingredients.isEmpty()) {
+            System.out.println("No ingredients were added. Recipe not added.");
+            return; // 空の場合はレシピを追加せず戻る
+        }
 
-    Recipe recipe = new Recipe(recipeName, ingredients); 
-    try {
-        dataHandler.writeData(recipe);
-        System.out.println("Recipe added successfully.\n");
-    } catch (IOException e) {
-        System.out.println("Failed to add new recipe: " + e.getMessage());
+        Recipe recipe = new Recipe(recipeName, new ArrayList<>(ingredients));
+        try {
+            dataHandler.writeData(recipe);
+            System.out.println("Recipe added successfully.\n");
+        } catch (IOException e) {
+            System.out.println("Failed to add new recipe: " + e.getMessage());
+        }
     }
 }
